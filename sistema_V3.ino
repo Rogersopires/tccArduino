@@ -98,14 +98,18 @@ void programa() {
   botoesMenu();
   }
   
-  botaoDelay(pin_liga,bot_liga);
+  //botaoDelay(pin_liga,bot_liga);
+  if (digitalRead(pin_liga) != HIGH && (millis() - temporizador_botao) > 100) {
+    temporizador_botao = millis();
+    bot_liga = !bot_liga;
+  }
 }
 
 
 // Tira o delay do botao e muda o estado do botao
 
 void botaoDelay(int botao,boolean estado){
-  if (digitalRead(botao) != estado && (millis() - temporizador_botao) > 100) {
+  if (digitalRead(botao) != HIGH && (millis() - temporizador_botao) > 100) {
     temporizador_botao = millis();
     estado = !estado;
   }
